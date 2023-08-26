@@ -4,7 +4,7 @@ import * as webpack from 'webpack';
 // eslint-disable-next-line
 import CopyPlugin from 'copy-webpack-plugin';
 
-type BrowserTypes = 'chrome' | 'firefox' | 'edge';
+type BrowserTypes = 'chrome' | 'firefox' | 'edge' | 'safari';
 
 const publicFolder = join(__dirname, 'public');
 const cssFolder = join(publicFolder, 'css');
@@ -75,5 +75,10 @@ export default (
   arv: Record<string, string>,
 ): webpack.Configuration[] => {
   const isProd = arv.mode !== 'development';
-  return [getConfigByBrowser(isProd, 'chrome'), getConfigByBrowser(isProd, 'firefox'), getConfigByBrowser(isProd, 'edge')];
+  return [
+    getConfigByBrowser(isProd, 'chrome'),
+    getConfigByBrowser(isProd, 'firefox'),
+    getConfigByBrowser(isProd, 'edge'),
+    getConfigByBrowser(isProd, 'safari'),
+  ];
 };

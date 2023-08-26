@@ -1,6 +1,7 @@
 export const IS_EDGE = navigator.userAgent.includes('Edg');
 export const IS_FIREFOX = navigator.userAgent.includes('Firefox');
-export const IS_CHROME = IS_EDGE === false && IS_FIREFOX === false;
+export const IS_SAFARI = navigator.userAgent.includes('Safari');
+export const IS_CHROME = IS_EDGE === false && IS_FIREFOX === false && IS_SAFARI === false;
 
 export const generateProjectFromDevSites = (url: string): string | null => {
   const githubUrls = ['https://github.com/', 'https://github.dev/'];
