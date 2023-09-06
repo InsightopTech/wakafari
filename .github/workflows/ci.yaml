@@ -1,0 +1,114 @@
+name: pack
+
+on:
+  push:
+    # branches: [master, next]
+    paths-ignore:
+      - '.vscode/**'
+      - '**.md'
+      - 'AUTHORS'
+      - 'LICENSE'
+  pull_request:
+    branches: [master, next]
+    paths-ignore:
+      - '.vscode/**'
+      - '**.md'
+      - 'AUTHORS'
+      - 'LICENSE'
+concurrency:
+  # Cancels the workflow
+  # when another event in the same context happens.
+  # If it's a PR, context is the pull request number.
+  # Otherwise, it uses the Git reference(branch or tag name).
+  group: >
+    ${{ github.workflow }}
+    ${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: pack on macos-latest
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false # Important
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node toolchain
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Run npm ci
+        run: npm ci
+
+      - name: Run npm test
+        run: npm test
+
+      - name: Run npm run build
+        run: npm run build
+
+      - name: Setup Xcode toolchain
+        uses: mxcl/xcodebuild@v2
+        with:
+          working-directory: dist/safari
+          platform: macOS
+          action: none # default = `test`
+          code-coverage: true # default = `false`
+          #   warnings-as-errors: true # default = `false`
+          configuration: release # no default, ie. `xcodebuild` decides itself
+
+      # - name: Install Apple Certificate # 安装苹果证书
+      #   uses: apple-actions/import-codesign-certs@v1
+      #   with:
+      #     p12-file-base64: ${{ secrets.P12_BASE64 }}
+      #     p12-password: ${{ secrets.P12_PASSWORD }}
+
+      # - name: Install the provisioning profile # 安装描述文件
+      #   env:
+      #     PROVISIONING_CERTIFICATE_BASE64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
+      #   run: |
+      #     PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
+
+      #     echo -n "$PROVISIONING_CERTIFICATE_BASE64" | base64 --decode --output $PP_PATH
+
+      #     mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+      #     cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+
+      - name: Convert to Xcode project
+        working-directory: dist/safari # 转换后的工程在这个目录下
+        run: | # 转换成 Xcode 工程
+          xcrun /Applications/Xcode.app/Contents/Developer/usr/bin/safari-web-extension-converter \
+          ./ \
+          --app-name wakafari \
+          --macos-only \
+          --no-open \
+          --no-prompt
+
+      - name: Xcode build
+        working-directory: dist/safari/wakafari
+        run: | # 生成文件夹 build
+          xcodebuild -project \
+          wakafari.xcodeproj \
+          build \
+          CODE_SIGNING_ALLOWED=NO \
+          CODE_SIGNING_REQUIRED=NO
+
+      - name: Pack to dmg
+        working-directory: dist/safari/wakafari
+        run: | # 将 build 文件夹打包成 dmg
+          hdiutil create \
+          -volname "wakafari" \
+          -srcfolder "build/release/wakafari.app" \
+          -ov -format UDZO "wakafari.dmg"
+
+      - name: Output directory
+        working-directory: dist/safari/wakafari
+        run: ls -la
+
+      - name: Upload  artifact # 将生成的工件上传
+        uses: actions/upload-artifact@v3
+        with:
+          name: wakafari
+          path: dist/safari/wakafari/wakafari.dmg
