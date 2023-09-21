@@ -31,6 +31,8 @@ jobs:
     runs-on: macos-latest
     strategy:
       fail-fast: false # Important
+    env:
+      WORKING_DIRECTORY: dist/safari/wakafari
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -87,7 +89,7 @@ jobs:
           --no-prompt
 
       - name: Xcode build
-        working-directory: dist/safari/wakafari
+        working-directory: ${{ env.WORKING_DIRECTORY }}
         run: | # 生成文件夹 build
           xcodebuild -project \
           wakafari.xcodeproj \
@@ -96,7 +98,7 @@ jobs:
           CODE_SIGNING_REQUIRED=NO
 
       - name: Pack to dmg
-        working-directory: dist/safari/wakafari
+        working-directory: ${{ env.WORKING_DIRECTORY }}
         run: | # 将 build 文件夹打包成 dmg
           hdiutil create \
           -volname "wakafari" \
@@ -104,11 +106,11 @@ jobs:
           -ov -format UDZO "wakafari.dmg"
 
       - name: Output directory
-        working-directory: dist/safari/wakafari
+        working-directory: ${{ env.WORKING_DIRECTORY }}
         run: ls -la
 
       - name: Upload  artifact # 将生成的工件上传
         uses: actions/upload-artifact@v3
         with:
           name: wakafari
-          path: dist/safari/wakafari/wakafari.dmg
+          path: ${{ env.WORKING_DIRECTORY }}/wakafari.dmg
