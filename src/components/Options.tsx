@@ -203,7 +203,7 @@ export default function Options(): JSX.Element {
     <div
       className="container"
       style={{
-        height: 650, //If height is 590, the save button is not visible on Safari
+        height: 900, //If height is 590, the save button is not visible on Safari
         marginTop: 0,
         overflow: 'hidden',
         overflowY: 'scroll',
