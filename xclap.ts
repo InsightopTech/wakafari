@@ -29,7 +29,7 @@ const filesNeededForNextBuild = [
   'popup.html',
   'public/js/browser-polyfill.min.js',
   'public/css/app.css',
-  'graphics/wakatime-logo-16.png',
+  'graphics/wakafari-logo-16.png',
   'wakatimeScript.js',
 ];
 const chromeNextBuildFileWaitTask = waitForFilesTask(

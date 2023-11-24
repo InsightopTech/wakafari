@@ -10,15 +10,15 @@ type ColorIconTypes = 'gray' | 'red' | 'white' | '';
 export default async function changeExtensionIcon(color?: ColorIconTypes): Promise<void> {
   let path;
   if (color) {
-    path = `./graphics/wakatime-logo-38-${color}.png`;
+    path = `./graphics/wakafari-logo-38-${color}.png`;
   } else {
     const { theme } = await browser.storage.sync.get({
       theme: config.theme,
     });
     path =
       theme === config.theme
-        ? './graphics/wakatime-logo-38.png'
-        : './graphics/wakatime-logo-38-white.png';
+        ? './graphics/wakafari-logo-38.png'
+        : './graphics/wakafari-logo-38-white.png';
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition

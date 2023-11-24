@@ -1,8 +1,8 @@
 {
   "action": {
     "default_icon": {
-      "19": "graphics/wakatime-logo-19.png",
-      "38": "graphics/wakatime-logo-38.png"
+      "19": "graphics/wakafari-logo-19.png",
+      "38": "graphics/wakafari-logo-38.png"
     },
     "default_popup": "popup.html",
     "default_title": "Wakafari"
@@ -22,9 +22,9 @@
   "homepage_url": "https://insightop.com",
   "host_permissions": ["https://api.wakatime.com/*", "https://wakatime.com/*"],
   "icons": {
-    "16": "graphics/wakatime-logo-16.png",
-    "48": "graphics/wakatime-logo-48.png",
-    "128": "graphics/wakatime-logo-128.png"
+    "16": "graphics/wakafari-logo-16.png",
+    "48": "graphics/wakafari-logo-48.png",
+    "128": "graphics/wakafari-logo-128.png"
   },
   "manifest_version": 3,
   "name": "Wakafari",
