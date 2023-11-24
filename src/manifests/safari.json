@@ -8,8 +8,7 @@
     "default_title": "Wakafari"
   },
   "background": {
-    "service_worker": "background.js",
-    "type": "module"
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {
@@ -32,6 +31,6 @@
   "options_ui": {
     "page": "options.html"
   },
-  "permissions": ["alarms", "tabs", "storage", "idle"],
+  "permissions": ["alarms", "tabs", "storage"],
   "version": "3.0.21"
 }
