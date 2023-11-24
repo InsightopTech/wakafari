@@ -1,6 +1,6 @@
 import browser from 'webextension-polyfill';
-import config from '../config/config';
 import { IS_FIREFOX } from '.';
+import config from '../config/config';
 
 type ColorIconTypes = 'gray' | 'red' | 'white' | '';
 
