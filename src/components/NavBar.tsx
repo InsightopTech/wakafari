@@ -65,7 +65,7 @@ export default function NavBar(): JSX.Element {
           </button>
           <a target="_blank" className="navbar-brand" href="https://wakatime.com" rel="noreferrer">
             Wakafari
-            <img src="graphics/wakatime-logo-48.png" />
+            <img src="graphics/wakafari-logo-48.png" />
           </a>
         </div>
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

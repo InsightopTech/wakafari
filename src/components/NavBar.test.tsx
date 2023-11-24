@@ -50,7 +50,7 @@ describe('NavBar', () => {
               >
                 WakaTime
                 <img
-                  src="graphics/wakatime-logo-48.png"
+                  src="graphics/wakafari-logo-48.png"
                 />
               </a>
             </div>
