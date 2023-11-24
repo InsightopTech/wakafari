@@ -64,7 +64,7 @@ export default function NavBar(): JSX.Element {
             <i className="fa fa-fw fa-cogs"></i>
           </button>
           <a target="_blank" className="navbar-brand" href="https://wakatime.com" rel="noreferrer">
-            WakaTime
+            Wakafari
             <img src="graphics/wakatime-logo-48.png" />
           </a>
         </div>
@@ -73,40 +73,11 @@ export default function NavBar(): JSX.Element {
           <ul className="nav navbar-nav">
             {customRules()}
             {dashboard()}
-            <li className="dropdown">
-              <a
-                href="#"
-                className="dropdown-toggle"
-                data-toggle="dropdown"
-                role="button"
-                aria-expanded="false"
-              >
-                <i className="fa fa-fw fa-info"></i>
-                About
-                <span className="caret"></span>
+            <li>
+              <a target="_blank" href="https://github.com/insightoptech/wakafari" rel="noreferrer">
+                <i className="fa fa-fw fa-github"></i>
+                View on GitHub
               </a>
-              <ul className="dropdown-menu" role="menu">
-                <li>
-                  <a
-                    target="_blank"
-                    href="https://github.com/wakatime/chrome-wakatime/issues"
-                    rel="noreferrer"
-                  >
-                    <i className="fa fa-fw fa-bug"></i>
-                    Report an Issue
-                  </a>
-                </li>
-                <li>
-                  <a
-                    target="_blank"
-                    href="https://github.com/wakatime/chrome-wakatime"
-                    rel="noreferrer"
-                  >
-                    <i className="fa fa-fw fa-github"></i>
-                    View on GitHub
-                  </a>
-                </li>
-              </ul>
             </li>
           </ul>
         </div>
