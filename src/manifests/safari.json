@@ -19,7 +19,7 @@
   ],
   "description": "Automatic time tracking for Safari.",
   "devtools_page": "devtools.html",
-  "homepage_url": "https://wakatime.com",
+  "homepage_url": "https://insightop.com",
   "host_permissions": ["https://api.wakatime.com/*", "https://wakatime.com/*"],
   "icons": {
     "16": "graphics/wakatime-logo-16.png",

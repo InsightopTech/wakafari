@@ -158,7 +158,7 @@ const config: Config = {
 
   logoutUserUrl: process.env.LOGOUT_USER_URL ?? 'https://wakatime.com/logout',
 
-  name: 'WakaTime',
+  name: 'Wakafari',
 
   nonTrackableSites: ['chrome://', 'about:'],
 
